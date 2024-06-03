@@ -19,6 +19,7 @@ export async function saveImpl(
 ): Promise<number | void> {
     let cacheId = -1;
     try {
+        utils.setActionsCacheUrl();
         if (!utils.isCacheFeatureAvailable()) {
             return;
         }

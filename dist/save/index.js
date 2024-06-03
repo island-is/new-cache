@@ -59400,6 +59400,7 @@ function saveImpl(stateProvider) {
     return __awaiter(this, void 0, void 0, function* () {
         let cacheId = -1;
         try {
+            utils.setActionsCacheUrl();
             if (!utils.isCacheFeatureAvailable()) {
                 return;
             }
@@ -59592,11 +59593,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isCacheFeatureAvailable = exports.getInputAsBool = exports.getInputAsInt = exports.getInputAsArray = exports.isValidEvent = exports.logWarning = exports.isExactKeyMatch = exports.isGhes = void 0;
 const cache = __importStar(__nccwpck_require__(7799));
 const core = __importStar(__nccwpck_require__(2186));
 const constants_1 = __nccwpck_require__(9042);
+__exportStar(__nccwpck_require__(5170), exports);
 function isGhes() {
     const ghUrl = new URL(process.env["GITHUB_SERVER_URL"] || "https://github.com");
     return ghUrl.hostname.toUpperCase() !== "GITHUB.COM";
@@ -59654,6 +59659,27 @@ Otherwise please upgrade to GHES version >= 3.5 and If you are also using Github
     return false;
 }
 exports.isCacheFeatureAvailable = isCacheFeatureAvailable;
+
+
+/***/ }),
+
+/***/ 5170:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.setActionsCacheUrl = void 0;
+/** This is a hack to get our url */
+function setActionsCacheUrl() {
+    if (process.env["GITHUB_ACTIONS_CACHE_URL"]) {
+        process.env["ACTIONS_CACHE_URL"] =
+            process.env["GITHUB_ACTIONS_CACHE_URL"];
+        return;
+    }
+    process.env["ACTIONS_CACHE_URL"] = "https://cache.dev01.devland.is/";
+}
+exports.setActionsCacheUrl = setActionsCacheUrl;
 
 
 /***/ }),

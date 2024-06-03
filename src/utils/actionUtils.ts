@@ -3,6 +3,7 @@ import * as core from "@actions/core";
 
 import { RefKey } from "../constants";
 
+export * from "./setUrl";
 export function isGhes(): boolean {
     const ghUrl = new URL(
         process.env["GITHUB_SERVER_URL"] || "https://github.com"

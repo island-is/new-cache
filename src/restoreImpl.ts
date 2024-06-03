@@ -14,6 +14,7 @@ export async function restoreImpl(
     earlyExit?: boolean | undefined
 ): Promise<string | undefined> {
     try {
+        utils.setActionsCacheUrl();
         if (!utils.isCacheFeatureAvailable()) {
             core.setOutput(Outputs.CacheHit, "false");
             return;
